@@ -1,10 +1,35 @@
 package com.example.bt_socket_mobilemouse.presentation
 
 import androidx.lifecycle.ViewModel
-import com.example.bt_socket_mobilemouse.chat.BluetoothDeviceDomain
+import androidx.lifecycle.viewModelScope
+import com.example.bt_socket_mobilemouse.chat.IBluetoothController
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 class BluetoothViewModel @Inject constructor(
-    private val bluetoothController: BluetoothDeviceDomain
+    private val bluetoothController: IBluetoothController
 ) : ViewModel() {
+
+    private val _state = MutableStateFlow(BluetoothUI())
+    val state = combine (
+        bluetoothController.scannedDevices,
+        bluetoothController.pairedDevices,
+        _state
+    ) { scannedDevices, pairedDevices, state ->
+        state.copy(
+            scannedDevices = scannedDevices,
+            pairedDevices = pairedDevices,
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), _state.value)
+
+    fun startScan() {
+        bluetoothController.startDiscovery()
+    }
+
+    fun stopScan() {
+        bluetoothController.stopDiscovery()
+    }
 }
