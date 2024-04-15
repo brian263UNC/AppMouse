@@ -72,9 +72,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("androidx.hilt:hilt-navigation-fragment:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
-    implementation(libs.hilt.android)
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // required to avoid crash on Android 12 API 31
+    implementation ("androidx.work:work-runtime-ktx:2.7.0")
 }
 
 kapt {

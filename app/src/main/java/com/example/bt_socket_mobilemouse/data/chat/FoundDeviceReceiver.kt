@@ -1,3 +1,5 @@
+@file:Suppress("INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION", "DEPRECATION")
+
 package com.example.bt_socket_mobilemouse.data.chat
 
 import android.bluetooth.BluetoothDevice
@@ -14,11 +16,11 @@ class FoundDeviceReceiver(
             BluetoothDevice.ACTION_FOUND -> {
                 val device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     intent.getParcelableArrayExtra(
-                        BluetoothDevice.EXTRA_NAME,
+                        BluetoothDevice.EXTRA_DEVICE,
                         BluetoothDevice::class.java
                     )
                 } else {
-                    intent.getParcelableExtra(BluetoothDevice.EXTRA_NAME)
+                    intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
                 }
                 device?.let{ onDeviceFound}
             }

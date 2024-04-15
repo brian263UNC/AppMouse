@@ -3,12 +3,14 @@ package com.example.bt_socket_mobilemouse.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bt_socket_mobilemouse.chat.IBluetoothController
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
+@HiltViewModel
 class BluetoothViewModel @Inject constructor(
     private val bluetoothController: IBluetoothController
 ) : ViewModel() {

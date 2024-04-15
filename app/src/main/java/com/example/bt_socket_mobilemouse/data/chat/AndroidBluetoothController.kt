@@ -1,12 +1,10 @@
 package com.example.bt_socket_mobilemouse.data.chat
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import com.example.bt_socket_mobilemouse.Manifest
 import com.example.bt_socket_mobilemouse.chat.BluetoothDeviceDomain
 import com.example.bt_socket_mobilemouse.chat.IBluetoothController
 import kotlinx.coroutines.flow.MutableStateFlow
