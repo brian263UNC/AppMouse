@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,12 +24,21 @@ import com.example.bt_socket_mobilemouse.presentation.BluetoothUI
 fun DeviceScreen(
     state: BluetoothUI,
     onStartScan: () -> Unit,
-    onStopScan: () -> Unit
+    onStopScan: () -> Unit,
+    onDeviceClick: (BluetoothDevice) -> Unit,
+    onStartServer: () -> Unit
 ) {
     Column (
         modifier = Modifier
             .fillMaxSize()
     ) {
+        BluetoothDeviceList(
+            pairedDevices = state.pairedDevices,
+            scannedDevices = state.scannedDevices,
+            onClick = onDeviceClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f))
 
         Row (
             modifier = Modifier.fillMaxWidth(),
@@ -41,6 +51,11 @@ fun DeviceScreen(
             Button(onClick = onStopScan ) {
                 Text(text = "Stop Scan")
             }
+
+            Button(onClick = onStartServer ) {
+                Text(text = "Start Server")
+            }
+
 
         }
     }
