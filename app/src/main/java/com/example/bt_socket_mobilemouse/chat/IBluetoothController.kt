@@ -1,5 +1,6 @@
 package com.example.bt_socket_mobilemouse.chat
 
+import com.example.bt_socket_mobilemouse.data.chat.BluetoothMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,4 +18,6 @@ interface IBluetoothController {
     fun statBluetoothServer(): Flow<ConnectionResult>
     fun connectToDevice(device: BluetoothDevice): Flow<ConnectionResult>
     fun closeConnection()
+
+    suspend fun trySendMessage(message: String): BluetoothMessage?
 }
